@@ -1,94 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF‑8">
-  <title>Jogo de Geografia</title>
-  <style>
-    .tela { display: none; }
-    .ativa { display: block; }
-    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
-  </style>
-</head>
-<body>
-
-  <!-- Tela Inicial -->
-  <div id="tela-inicial" class="tela ativa">
-    <h1>Bem-vindo ao Jogo de Geografia!</h1>
-    <button onclick="iniciar()">Começar</button>
+<div class="quiz-container">
+  <h1>Quiz: Conflitos Mundiais Recentes</h1>
+  <p id="question"></p>
+  
+  <div class="answers">
+    <button class="answer-btn" onclick="checkAnswer(0)"></button>
+    <button class="answer-btn" onclick="checkAnswer(1)"></button>
+    <button class="answer-btn" onclick="checkAnswer(2)"></button>
+    <button class="answer-btn" onclick="checkAnswer(3)"></button>
   </div>
-
-  <!-- Tela de Pergunta -->
-  <div id="tela-pergunta" class="tela">
-    <h2 id="pergunta-texto">Pergunta?</h2>
-    <div id="opcoes">
-      <!-- Serão inseridas as opções -->
-    </div>
-    <button onclick="voltar()">Voltar</button>
-  </div>
-
-  <script>
-    const perguntas = [
-      {
-        texto: "Qual é capital do Brasil?",
-        opcoes: ["Brasília", "São Paulo", "Rio de Janeiro", "Salvador"],
-        correta: 0
-      },
-      {
-        texto: "Qual é o maior oceano?",
-        opcoes: ["Atlântico", "Índico", "Pacífico", "Ártico"],
-        correta: 2
-      }
-      // adicione mais perguntas se quiser
-    ];
-
-    let indice = 0;
-
-    function mostrarTela(id) {
-      document.querySelectorAll('.tela').forEach(d => d.classList.remove('ativa'));
-      document.getElementById(id).classList.add('ativa');
-    }
-
-    function iniciar() {
-      indice = 0;
-      mostrarPergunta();
-    }
-
-    function mostrarPergunta() {
-      const p = perguntas[indice];
-      document.getElementById('pergunta-texto').textContent = p.texto;
-      const opDiv = document.getElementById('opcoes');
-      opDiv.innerHTML = '';
-      p.opcoes.forEach((op, i) => {
-        const btn = document.createElement('button');
-        btn.textContent = op;
-        btn.onclick = () => checarResposta(i);
-        opDiv.appendChild(btn);
-        opDiv.appendChild(document.createElement('br'));
-      });
-      mostrarTela('tela-pergunta');
-    }
-
-    function checarResposta(escolha) {
-      const p = perguntas[indice];
-      if (escolha === p.correta) {
-        alert('Resposta correta! 🎉');
-      } else {
-        alert('Resposta errada.');
-      }
-      indice++;
-      if (indice < perguntas.length) {
-        mostrarPergunta();
-      } else {
-        alert('Fim do jogo!');
-        mostrarTela('tela-inicial');
-      }
-    }
-
-    function voltar() {
-      mostrarTela('tela-inicial');
-    }
-  </script>
-
-</body>
-</html>
+  
+  <div id="result"></div>
+  <button id="next-btn" onclick="nextQuestion()">Próxima Pergunta</button>
+</div>
